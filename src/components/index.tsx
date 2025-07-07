@@ -477,7 +477,7 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className={styles.footer}>
         <div className={styles.container}>
-          <p>© 20245 Joseph Herrera Libreros. Desarrollado con ❤️ y mucho café ☕</p>
+          <p>© 2025 Joseph Herrera Libreros. Desarrollado con ❤️ y mucho café ☕</p>
         </div>
       </footer>
     </div>
