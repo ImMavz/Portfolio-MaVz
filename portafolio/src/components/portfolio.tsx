@@ -3,6 +3,29 @@
 import { useState, useEffect } from "react"
 import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code, Database, Globe } from "lucide-react"
 import foto from "../assets/foto.jpeg"
+//Logos Tecnologías
+import jsLogo from "../assets/logos/tecnologias/js.png"
+import clogo from "../assets/logos/tecnologias/c++.png"
+import csslogo from "../assets/logos/tecnologias/css.png"
+import htmlLogo from "../assets/logos/tecnologias/html.png"
+import pythonLogo from "../assets/logos/tecnologias/py.webp"
+import javalogo from "../assets/logos/tecnologias/java.webp"
+import psql from "../assets/logos/tecnologias/psql.png"
+import typescriptlogo from "../assets/logos/tecnologias/typ.png"
+// Logo Frameworks 
+import expresslogo from "../assets/logos/frameworks/express.png"
+import nodelogo from "../assets/logos/frameworks/node.webp"
+import reactlogo from "../assets/logos/frameworks/react.png"
+import springbootlogo from "../assets/logos/frameworks/springboot.webp"
+import nextlogo from "../assets/logos/frameworks/nextjs.png"
+//Logos Herramientas
+import gitlogo from "../assets/logos/herramientas/git.png"
+import dockerlogo from "../assets/logos/herramientas/docker.svg"
+import awslogo from "../assets/logos/herramientas/aws.png"
+import gcloudlogo from "../assets/logos/herramientas/googlecloud.png"
+import postmanlogo from "../assets/logos/herramientas/postman.png"
+import vscode from "../assets/logos/herramientas/vscode.png"
+import pgadmin from "../assets/logos/herramientas/pgadmin.png"
 import styles from "./Portfolio.module.css"
 
 export default function Portfolio() {
@@ -73,8 +96,8 @@ export default function Portfolio() {
       demo: "#",
     },
     {
-      title: "Por ver",
-      description: "Plataforma web para gestión de reservas y citas con notificaciones automáticas.",
+      title: "BlackJack IA",
+      description: "Aplicacion web del famoso juego de BlackJack con IA.",
       technologies: ["Angular", "Spring Boot", "Oracle", "WebSocket"],
       image: "/placeholder.svg?height=200&width=300",
       github: "#",
@@ -89,6 +112,68 @@ export default function Portfolio() {
       demo: "#",
     },
   ]
+    // Componente TechCarousel
+  const TechCarousel = ({ items }: { items: { name: string; image: string }[] }) => {
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const itemsPerView = 8
+    const maxIndex = Math.max(0, items.length - itemsPerView)
+
+    const nextSlide = () => {
+      setCurrentIndex((prev) => Math.min(prev + 1, maxIndex))
+    }
+
+    const prevSlide = () => {
+      setCurrentIndex((prev) => Math.max(prev - 1, 0))
+    }
+
+    const visibleItems = items.slice(currentIndex, currentIndex + itemsPerView)
+
+    return (
+      <div className={styles.carouselContainer}>
+        {items.length > itemsPerView && (
+          <button
+            onClick={prevSlide}
+            disabled={currentIndex === 0}
+            className={`${styles.carouselButton} ${styles.carouselButtonLeft}`}
+            aria-label="Anterior"
+          >
+            <svg className={styles.iconSmall} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+        )}
+
+        <div className={styles.carouselTrack}>
+          <div
+            className={styles.carouselItems}
+            style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}
+          >
+            {items.map((item, index) => (
+              <div key={index} className={styles.techItem}>
+                <div className={styles.techImageContainer}>
+                  <img src={item.image || "/placeholder.svg"} alt={item.name} className={styles.techImage} />
+                </div>
+                <span className={styles.techName}>{item.name}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {items.length > itemsPerView && (
+          <button
+            onClick={nextSlide}
+            disabled={currentIndex >= maxIndex}
+            className={`${styles.carouselButton} ${styles.carouselButtonRight}`}
+            aria-label="Siguiente"
+          >
+            <svg className={styles.iconSmall} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        )}
+      </div>
+    )
+  }
 
   return (
     <div className={styles.portfolio}>
@@ -186,6 +271,67 @@ export default function Portfolio() {
         </div>
       </section>
 
+      {/* Technologies Section */}
+      <section className={styles.technologiesSection}>
+        <div className={styles.container}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>Tecnologías & Herramientas</h2>
+            <p className={styles.sectionDescription}>
+              Las tecnologías, frameworks y herramientas de las cuales tengo conocimento para crear soluciones.
+            </p>
+          </div>
+
+          <div className={styles.techCategories}>
+            {/* Tecnologías */}
+            <div className={styles.techCategory}>
+              <h3 className={styles.categoryTitle}>Tecnologías</h3>
+              <TechCarousel
+              items={[
+                { name: "JavaScript", image: jsLogo.src },
+                { name: "TypeScript", image: typescriptlogo.src },
+                { name: "Python", image: pythonLogo.src },
+                { name: "Java", image: javalogo.src },
+                { name: "C++", image: clogo.src },
+                { name: "HTML5", image: htmlLogo.src },
+                { name: "CSS3", image: csslogo.src },
+                { name: "SQL", image: psql.src },
+              ]}
+              />
+            </div>
+
+            {/* Frameworks */}
+            <div className={styles.techCategory}>
+              <h3 className={styles.categoryTitle}>Frameworks</h3>
+              <TechCarousel
+              items={[
+                { name: "React", image: reactlogo.src },
+                { name: "Next.js", image: nextlogo.src },
+                { name: "Node.js", image: nodelogo.src },
+                { name: "Express", image: expresslogo.src },
+                { name: "Spring Boot", image: springbootlogo.src },
+              ]}
+              />
+            </div>
+
+            {/* Herramientas */}
+            <div className={styles.techCategory}>
+              <h3 className={styles.categoryTitle}>Herramientas</h3>
+              <TechCarousel
+              items={[
+                { name: "Git", image: gitlogo.src },
+                { name: "Docker", image: dockerlogo.src },
+                { name: "AWS", image: awslogo.src },
+                { name: "Google cloud", image: gcloudlogo.src },
+                { name: "PostgreSQL", image: pgadmin.src },
+                { name: "VS Code", image: vscode.src },
+                { name: "Postman", image: postmanlogo.src },
+              ]}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Projects Section */}
       <section id="proyectos" className={styles.projectsSection}>
         <div className={styles.container}>
@@ -250,7 +396,7 @@ export default function Portfolio() {
                   </div>
                   <div className={styles.contactDetails}>
                     <h3>Email</h3>
-                    <p>tu.email@ejemplo.com</p>
+                    <p>josephherrera1407@gmail.com</p>
                   </div>
                 </div>
 
@@ -260,7 +406,7 @@ export default function Portfolio() {
                   </div>
                   <div className={styles.contactDetails}>
                     <h3>Teléfono</h3>
-                    <p>+57 300 123 4567</p>
+                    <p>+57 315 6405662</p>
                   </div>
                 </div>
 
@@ -270,7 +416,7 @@ export default function Portfolio() {
                   </div>
                   <div className={styles.contactDetails}>
                     <h3>Ubicación</h3>
-                    <p>Bogotá, Colombia</p>
+                    <p>Buga, Valle del cauca, Colombia</p>
                   </div>
                 </div>
               </div>
@@ -288,7 +434,7 @@ export default function Portfolio() {
                   </div>
                   <div className={styles.techItem}>
                     <Globe className={styles.icon} />
-                    <p>Cloud</p>
+                    <p>Bases de datos</p>
                   </div>
                 </div>
               </div>
@@ -331,7 +477,7 @@ export default function Portfolio() {
       {/* Footer */}
       <footer className={styles.footer}>
         <div className={styles.container}>
-          <p>© 2024 Tu Nombre. Desarrollado con ❤️ y mucho café ☕</p>
+          <p>© 20245 Joseph Herrera Libreros. Desarrollado con ❤️ y mucho café ☕</p>
         </div>
       </footer>
     </div>
