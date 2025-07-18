@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code, Database, Globe } from "lucide-react"
+import { Github, Linkedin, Mail, Phone, MapPin, ExternalLink, Code, Database, Globe, Backpack } from "lucide-react"
 import foto from "../assets/foto.jpeg"
 //Logos Tecnologías
 import jsLogo from "../assets/logos/tecnologias/js.png"
@@ -26,6 +26,10 @@ import gcloudlogo from "../assets/logos/herramientas/googlecloud.png"
 import postmanlogo from "../assets/logos/herramientas/postman.png"
 import vscode from "../assets/logos/herramientas/vscode.png"
 import pgadmin from "../assets/logos/herramientas/pgadmin.png"
+import hotel from "../assets/fotoHotel.png"
+import blackjack from "../assets/FotoBlackJack.png"
+import laberinto from "../assets/FotoLaberinto.png"
+import pokemon from "../assets/FotoPokemon.png"
 import styles from "./Portfolio.module.css"
 
 export default function Portfolio() {
@@ -75,33 +79,33 @@ export default function Portfolio() {
       description:
         "Aplicación web para gestión de reservas de hotel.",
       technologies: ["React", "Next.js", "PostgreSQL", "Express"],
-      image: "/placeholder.svg?height=200&width=300",
-      github: "#",
-      demo: "#",
+      image: {src: hotel.src, height: 200, width: 300 },
+      github: "https://github.com/ImMavz/HotelElDescanso-DemoMaVz",
+      demo: "https://hotel-el-descanso.netlify.app/",
     },
     {
       title: "Laberinto Inteligente",
       description: "Laberitno dinamico con IA para resolver laberintos generados aleatoriamente mediante tecincas de Búsqueda.",
       technologies: ["Python"],
-      image: "/placeholder.svg?height=200&width=300",
-      github: "#",
+      image: {src: laberinto.src, height: 200, width: 300 },
+      github: "https://github.com/Samth18/proyecto1-ia",
       demo: "#",
     },
     {
       title: "IA de batallas Pokemon",
       description: "Panel de control para análisis de datos con visualizaciones interactivas y reportes automatizados.",
       technologies: ["Python"],
-      image: "/placeholder.svg?height=200&width=300",
-      github: "#",
+      image: {src: pokemon.src, height: 200, width: 300 },
+      github: "https://github.com/Samth18/pokeminimax-ia",
       demo: "#",
     },
     {
       title: "BlackJack IA",
       description: "Aplicacion web del famoso juego de BlackJack con IA.",
       technologies: ["Angular", "Spring Boot", "Oracle", "WebSocket"],
-      image: "/placeholder.svg?height=200&width=300",
-      github: "#",
-      demo: "#",
+      image: {src: blackjack.src, height: 200, width: 300 },
+      github: "https://github.com/ImMavz/BlackJackIA-MaVz",
+      demo: "https://black-jack-ia-ma-vz.vercel.app/",
     },
     {
       title: "Por ver",
@@ -338,7 +342,7 @@ export default function Portfolio() {
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Mis Proyectos</h2>
             <p className={styles.sectionDescription}>
-              Una selección de proyectos personales que demuestran mis habilidades técnicas y creatividad
+              Una selección de proyectos personales que demuestran mis habilidades.
             </p>
           </div>
 
@@ -346,7 +350,11 @@ export default function Portfolio() {
             {projects.map((project, index) => (
               <div key={index} className={styles.projectCard}>
                 <div className={styles.projectImage}>
-                  <img src={project.image || "/placeholder.svg"} alt={project.title} className={styles.projectImg} />
+                  <img
+                    src={typeof project.image === "string" ? project.image : project.image?.src || "/placeholder.svg"}
+                    alt={project.title}
+                    className={styles.projectImg}
+                  />
                 </div>
                 <div className={styles.projectContent}>
                   <h3 className={styles.projectTitle}>{project.title}</h3>
@@ -387,8 +395,8 @@ export default function Portfolio() {
             </p>
           </div>
 
-          <div className={styles.contactContent}>
-            <div className={styles.contactInfo}>
+          <div className={styles.contactContentCentered}>
+            <div className={styles.contactInfoCentered}>
               <div className={styles.contactItems}>
                 <div className={styles.contactItem}>
                   <div className={styles.contactIcon}>
@@ -429,46 +437,15 @@ export default function Portfolio() {
                     <p>Frontend</p>
                   </div>
                   <div className={styles.techItem}>
-                    <Database className={styles.icon} />
+                    <Backpack className={styles.icon} />
                     <p>Backend</p>
                   </div>
                   <div className={styles.techItem}>
-                    <Globe className={styles.icon} />
+                    <Database className={styles.icon} />
                     <p>Bases de datos</p>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className={styles.contactForm}>
-              <div className={styles.formHeader}>
-                <h3>Envíame un mensaje</h3>
-                <p>Completa el formulario y te responderé lo antes posible</p>
-              </div>
-
-              <form className={styles.form}>
-                <div className={styles.formRow}>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="nombre">Nombre</label>
-                    <input type="text" id="nombre" placeholder="Tu nombre" />
-                  </div>
-                  <div className={styles.formGroup}>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id="email" placeholder="tu@email.com" />
-                  </div>
-                </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="asunto">Asunto</label>
-                  <input type="text" id="asunto" placeholder="¿De qué quieres hablar?" />
-                </div>
-                <div className={styles.formGroup}>
-                  <label htmlFor="mensaje">Mensaje</label>
-                  <textarea id="mensaje" placeholder="Cuéntame sobre tu proyecto..." rows={5}></textarea>
-                </div>
-                <button type="submit" className={`${styles.button} ${styles.buttonPrimary} ${styles.buttonFull}`}>
-                  Enviar Mensaje
-                </button>
-              </form>
             </div>
           </div>
         </div>
